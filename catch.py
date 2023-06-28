@@ -59,6 +59,7 @@ def show_turtle():
         turtle_screen.ontimer(show_turtle,500)
 
 def countdown(time):
+    global one_victory
     global game_over
     countdown_turtle.hideturtle()
     top_height = turtle_screen.window_height() / 2
@@ -72,11 +73,25 @@ def countdown(time):
         countdown_turtle.write(arg="Time: {}".format(time), move=False, align="center", font=Font)
         turtle_screen.ontimer(lambda: countdown(time - 1), 1000)
 
-    else:
+    elif score > 19 and score < 29 and time < 1:
         game_over = True
         countdown_turtle.clear()
         hide_turtles()
-        countdown_turtle.write(arg="Game Over", move=False, align="center", font=Font)
+        countdown_turtle.write(arg="Victory", move=False, align="center", font=Font)
+
+    elif score > 29 and time < 1:
+        game_over = True
+        countdown_turtle.clear()
+        hide_turtles()
+        countdown_turtle.write(arg="Your Aim İs So Good", move=False, align="center", font=Font)
+
+    elif score < 19 and time < 1:
+        game_over = True
+        countdown_turtle.clear()
+        hide_turtles()
+        countdown_turtle.write(arg="You Are So BAD", move=False, align="center", font=Font)
+
+
 
 turtle.Screen().tracer(0)
 setup_turtles()
